@@ -1,9 +1,22 @@
 # Our naming: sb = smallbelaz, TODO: rename this package to `sb_control`
 
 # Changes to the original example:
-- Removed a dependency on `bicycle_steering_controller`, brought its code into this source tree under directory `controller` and edited CMakeLists.txt correspondingly (taking inspiration from expample 10)
+- Removed a dependency on `bicycle_steering_controller`, brought its code into this source tree under directory `controller` and edited CMakeLists.txt correspondingly (taking inspiration from example 10)
 - Renamed the controller from `bicycle_steering_controller/BicycleSteeringController` to `ros2_control_demo_example_11/BicycleSteeringController` and changed its namespace from `bicycle_steering_controller` to `sb_steering_controller`
 - Edited controller manager config file and launch file accoridng to other changes
+
+# Build and launch instructions
+Building:
+- Create the following workspace structure:
+```
+-- ros2_ws
+ |-- src
+   |-- sb_control
+```
+- Run `colcon build --symlink-install` from the `ros2` directory
+
+Launching:
+- Run `ros2 launch ros2_control_demo_example_11 carlikebot.launch.py` with underlay being active
 
 ---
 
