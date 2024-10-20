@@ -15,13 +15,20 @@
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
+  <build_depend>generate_parameter_library</build_depend>
+
   <depend>backward_ros</depend>
   <depend>hardware_interface</depend>
   <depend>pluginlib</depend>
   <depend>rclcpp</depend>
   <depend>rclcpp_lifecycle</depend>
 
-  <exec_depend>bicycle_steering_controller</exec_depend>
+  <!-- taken from controller's package.xml, TODO: check if all are needed -->
+  <depend>control_msgs</depend>
+  <depend>controller_interface</depend>
+  <depend>std_srvs</depend>
+  <depend>steering_controllers_library</depend>
+
   <exec_depend>controller_manager</exec_depend>
   <exec_depend>joint_state_broadcaster</exec_depend>
   <exec_depend>joint_state_publisher_gui</exec_depend>

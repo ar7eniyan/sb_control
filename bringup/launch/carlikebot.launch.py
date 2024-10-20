@@ -114,10 +114,10 @@ def generate_launch_description():
         arguments=["joint_state_broadcaster", "--controller-manager", "/controller_manager"],
     )
 
-    robot_bicycle_controller_spawner = Node(
+    robot_sb_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["bicycle_steering_controller", "--controller-manager", "/controller_manager"],
+        arguments=["sb_steering_controller", "--controller-manager", "/controller_manager"],
     )
 
     # Delay rviz start after `joint_state_broadcaster`
@@ -132,7 +132,7 @@ def generate_launch_description():
     # TODO(anyone): This is a workaround for flaky tests. Remove when fixed.
     delay_joint_state_broadcaster_after_robot_controller_spawner = RegisterEventHandler(
         event_handler=OnProcessExit(
-            target_action=robot_bicycle_controller_spawner,
+            target_action=robot_sb_controller_spawner,
             on_exit=[joint_state_broadcaster_spawner],
         )
     )
@@ -141,7 +141,7 @@ def generate_launch_description():
         control_node,
         control_node_remapped,
         robot_state_pub_bicycle_node,
-        robot_bicycle_controller_spawner,
+        robot_sb_controller_spawner,
         delay_joint_state_broadcaster_after_robot_controller_spawner,
         delay_rviz_after_joint_state_broadcaster_spawner,
     ]
