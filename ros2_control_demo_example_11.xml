@@ -6,8 +6,8 @@
       The ros2_control CarlikeBot example using a system hardware interface-type. It uses velocity and position command and state interface for the drive motor and position command and state interface for the steering. The example is the starting point to implement a hardware interface for ackermann and bicycle drive robots.
     </description>
   </class>
-  <class name="ros2_control_demo_example_11/BicycleSteeringController"
-         type="sb_steering_controller::BicycleSteeringController" base_class_type="controller_interface::ChainableControllerInterface">
+  <class name="ros2_control_demo_example_11/AckermannSteeringController"
+         type="sb_steering_controller::AckermannSteeringController" base_class_type="controller_interface::ChainableControllerInterface">
   <description>
     Steering controller for Bicycle kinematics with one traction and one steering joint.
   </description>

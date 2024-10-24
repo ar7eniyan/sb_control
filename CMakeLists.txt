@@ -29,7 +29,7 @@ foreach(Dependency IN ITEMS ${THIS_PACKAGE_INCLUDE_DEPENDS})
 endforeach()
 
 generate_parameter_library(sb_steering_controller_parameters
-  controller/bicycle_steering_controller.yaml
+  controller/ackermann_steering_controller.yaml
 )
 
 ## COMPILE
@@ -37,7 +37,7 @@ add_library(
   ros2_control_demo_example_11
   SHARED
   hardware/carlikebot_system.cpp
-  controller/bicycle_steering_controller.cpp
+  controller/ackermann_steering_controller.cpp
 )
 target_compile_features(ros2_control_demo_example_11 PUBLIC cxx_std_17)
 target_include_directories(ros2_control_demo_example_11 PUBLIC

@@ -87,6 +87,7 @@ def generate_launch_description():
         package="controller_manager",
         executable="ros2_control_node",
         parameters=[robot_controllers],
+        arguments=['--ros-args', '--log-level', 'debug'],
         output="both",
         remappings=[
             ("~/robot_description", "/robot_description"),
