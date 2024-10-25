@@ -35,7 +35,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "remap_odometry_tf",
-            default_value="false",
+            default_value="true",
             description="Remap odometry TF from the steering controller to the TF tree.",
         )
     )
@@ -79,7 +79,7 @@ def generate_launch_description():
         output="both",
         remappings=[
             ("~/robot_description", "/robot_description"),
-            ("/bicycle_steering_controller/tf_odometry", "/tf"),
+            ("/sb_steering_controller/tf_odometry", "/tf"),
         ],
         condition=IfCondition(remap_odometry_tf),
     )
