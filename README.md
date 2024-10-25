@@ -7,13 +7,7 @@
 
 # Build and launch instructions
 Building:
-- Create the following workspace structure:
-```
--- ros2_ws
- |-- src
-   |-- sb_control
-```
-- Run `colcon build --symlink-install` from the `ros2` directory
+- The repository itself is a ros2 workspace, so run `colcon build --symlink-install` from root
 
 Launching:
 - Run `ros2 launch ros2_control_demo_example_11 carlikebot.launch.py` with underlay being active
