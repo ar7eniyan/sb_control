@@ -50,7 +50,8 @@ def generate_launch_description():
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
             PathJoinSubstitution(
-                [FindPackageShare("ros2_control_demo_example_11"), "urdf", "carlikebot.urdf.xacro"]
+                [FindPackageShare("ros2_control_demo_example_11"),
+                 "urdf", "carlikebot.urdf.xacro"]
             ),
         ]
     )
@@ -112,13 +113,15 @@ def generate_launch_description():
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["joint_state_broadcaster", "--controller-manager", "/controller_manager"],
+        arguments=["joint_state_broadcaster",
+                   "--controller-manager", "/controller_manager"],
     )
 
     robot_sb_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["sb_steering_controller", "--controller-manager", "/controller_manager"],
+        arguments=["sb_steering_controller",
+                   "--controller-manager", "/controller_manager"],
     )
 
     # Delay rviz start after `joint_state_broadcaster`
