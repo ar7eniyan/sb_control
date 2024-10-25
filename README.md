@@ -12,6 +12,10 @@ Building:
 Launching:
 - Run `ros2 launch ros2_control_demo_example_11 carlikebot.launch.py` with underlay being active
 
+# TODO:
+- Rename things all around
+- Clean up `ros2_control_demo_description`, get rid of `ros2_control_demo_testing`
+
 ---
 
 # ros2_control_demo_example_11
