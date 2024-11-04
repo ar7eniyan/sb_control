@@ -134,6 +134,9 @@ controller_interface::return_type TricycleController::update(
     RCLCPP_WARN(get_node()->get_logger(), "Velocity message received was a nullptr.");
     return controller_interface::return_type::ERROR;
   }
+  RCLCPP_INFO(get_node()->get_logger(), "Velocity message: v - %f, omega - %f",
+      last_command_msg->twist.linear.x,
+      last_command_msg->twist.angular.z);
 
   const auto age_of_last_command = time - last_command_msg->header.stamp;
   // Brake if cmd_vel has timeout, override the stored command
