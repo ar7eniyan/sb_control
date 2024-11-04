@@ -12,13 +12,18 @@ set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 set(THIS_PACKAGE_INCLUDE_DEPENDS
   controller_interface
   hardware_interface
-  generate_parameter_library
   pluginlib
   rclcpp
   rclcpp_lifecycle
+  rcpputils
   realtime_tools
+  builtin_interfaces
   std_srvs
-  steering_controllers_library
+  tf2
+  tf2_msgs
+  ackermann_msgs
+  geometry_msgs
+  nav_msgs
 )
 
 # find dependencies
@@ -28,16 +33,15 @@ foreach(Dependency IN ITEMS ${THIS_PACKAGE_INCLUDE_DEPENDS})
   find_package(${Dependency} REQUIRED)
 endforeach()
 
-generate_parameter_library(sb_steering_controller_parameters
-  controller/ackermann_steering_controller.yaml
-)
-
 ## COMPILE
 add_library(
   ros2_control_demo_example_11
   SHARED
   hardware/carlikebot_system.cpp
-  controller/ackermann_steering_controller.cpp
+  controller/tricycle_controller.cpp
+  controller/odometry.cpp
+  controller/traction_limiter.cpp
+  controller/steering_limiter.cpp
 )
 target_compile_features(ros2_control_demo_example_11 PUBLIC cxx_std_17)
 target_include_directories(ros2_control_demo_example_11 PUBLIC
@@ -45,8 +49,6 @@ $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/hardware/include>
 $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/controller/include>
 $<INSTALL_INTERFACE:include/ros2_control_demo_example_11>
 )
-target_link_libraries(ros2_control_demo_example_11 PUBLIC
-  sb_steering_controller_parameters)
 ament_target_dependencies(
   ros2_control_demo_example_11 PUBLIC
   ${THIS_PACKAGE_INCLUDE_DEPENDS}
@@ -55,6 +57,8 @@ ament_target_dependencies(
 # Causes the visibility macros to use dllexport rather than dllimport,
 # which is appropriate when building the dll but not consuming it.
 target_compile_definitions(ros2_control_demo_example_11 PRIVATE "ACKERMANN_STEERING_CONTROLLER_BUILDING_DLL")
+# From tricycle controller CMakeLists.txt
+target_compile_definitions(ros2_control_demo_example_11 PRIVATE _USE_MATH_DEFINES)
 
 # Export hardware plugins
 pluginlib_export_plugin_description_file(hardware_interface ros2_control_demo_example_11.xml)
@@ -78,7 +82,7 @@ install(
   DIRECTORY bringup/launch bringup/config
   DESTINATION share/ros2_control_demo_example_11
 )
-install(TARGETS ros2_control_demo_example_11 sb_steering_controller_parameters
+install(TARGETS ros2_control_demo_example_11
   EXPORT export_ros2_control_demo_example_11
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib

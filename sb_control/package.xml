@@ -22,12 +22,19 @@
   <depend>pluginlib</depend>
   <depend>rclcpp</depend>
   <depend>rclcpp_lifecycle</depend>
+  <depend>rcpputils</depend>
+  <depend>realtime_tools</depend>
 
   <!-- taken from controller's package.xml, TODO: check if all are needed -->
-  <depend>control_msgs</depend>
+  <depend>builtin_interfaces</depend>
   <depend>controller_interface</depend>
+  <depend>tf2</depend>
+  <depend>tf2_msgs</depend>
+  <depend>ackermann_msgs</depend>
+  <depend>control_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>nav_msgs</depend>
   <depend>std_srvs</depend>
-  <depend>steering_controllers_library</depend>
 
   <exec_depend>controller_manager</exec_depend>
   <exec_depend>joint_state_broadcaster</exec_depend>
