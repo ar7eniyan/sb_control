@@ -80,7 +80,7 @@ def generate_launch_description():
         output="both",
         remappings=[
             ("~/robot_description", "/robot_description"),
-            ("/sb_steering_controller/tf_odometry", "/tf"),
+            ("/sb_controller/tf_odometry", "/tf"),
         ],
         condition=IfCondition(remap_odometry_tf),
     )
@@ -95,7 +95,7 @@ def generate_launch_description():
         ],
         condition=UnlessCondition(remap_odometry_tf),
     )
-    robot_state_pub_bicycle_node = Node(
+    robot_state_pub = Node(
         package="robot_state_publisher",
         executable="robot_state_publisher",
         output="both",
@@ -120,7 +120,7 @@ def generate_launch_description():
     robot_sb_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
-        arguments=["sb_steering_controller",
+        arguments=["sb_controller",
                    "--controller-manager", "/controller_manager"],
     )
 
@@ -144,7 +144,7 @@ def generate_launch_description():
     nodes = [
         control_node,
         control_node_remapped,
-        robot_state_pub_bicycle_node,
+        robot_state_pub,
         robot_sb_controller_spawner,
         delay_joint_state_broadcaster_after_robot_controller_spawner,
         delay_rviz_after_joint_state_broadcaster_spawner,

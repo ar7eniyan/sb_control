@@ -160,24 +160,23 @@
 
     <!-- virtual front wheel -->
 
-    <link name="${prefix}virtual_front_wheel">
+    <link name="${prefix}steering_rack">
       <visual>
-        <origin xyz="0 0 0" rpy="${PI/2} 0 ${PI/2}"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <cylinder length="0.01" radius="${wheel_radius}"/>
+          <sphere radius="0.1"/>
         </geometry>
         <material name="invisible"/>
       </visual>
     </link>
 
-    <joint name="${prefix}virtual_front_wheel_joint" type="revolute">
+    <joint name="${prefix}steering_rack_joint" type="prismatic">
       <parent link="${prefix}chassis_link"/>
-      <child link="${prefix}virtual_front_wheel"/>
+      <child link="${prefix}steering_rack"/>
       <origin xyz="${wheelbase/2} 0 -${base_height/2}" rpy="0 0 ${PI/2}"/>
       <axis xyz="0 0 1"/>
       <limit lower="-0.4" upper="0.4" effort="100.0" velocity="0.0"/>
       <dynamics damping="0.2"/>
-       <mimic joint="${prefix}front_right_wheel_joint" multiplier="1.0" offset="0.0"/>
     </joint>
 
     <!-- front right wheel -->
